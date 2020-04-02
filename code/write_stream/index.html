@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<span id="info"></span>
+<button id="btn">点我发送请求,接收流数据</button>
+<script>
+    var info = document.querySelector("#info");
+    document.querySelector("#btn").onclick = function () {
+        // 发起ajax请求
+        var xhr = new XMLHttpRequest();
+        xhr.open('get','/test');
+        xhr.send();
+        // 处理响应
+        xhr.onreadystatechange = function () {
+            // readyState = 3 响应中  4 为响应完成
+            console.log(xhr.readyState);
+            console.log(xhr.responseText);
+            var arr = xhr.responseText.split('&');
+            info.innerText = arr[arr.length-2];
+        }
+    }
+</script>
+</body>
+</html>
